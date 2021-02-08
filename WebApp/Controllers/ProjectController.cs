@@ -32,6 +32,14 @@ namespace WebApp.Controllers
             return View(model);
         }
 
+        public ViewResult SharedProjects()
+        {
+            var userid = userManager.GetUserId(HttpContext.User);
+            //var model = _projectRepository.GetAllProject();
+            var model = from c in context.Projects join d in context.Assignment on c.ProjectId equals d.ProjectId join f in context.ApplicationUsers on d.UsersId equals f.Id where d.UsersId == userid select c;
+            return View(model);
+        }
+
         public ViewResult ProjectDetails(int? id)
         {
             var userid = userManager.GetUserId(HttpContext.User);
