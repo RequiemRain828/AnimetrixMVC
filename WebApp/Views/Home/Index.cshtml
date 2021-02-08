@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Simple Map</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+</head>
+<body>
+    <div id="map" class="mt-4"></div>
+    <div class="container-fluid text-dark card-deck p-5">
+        <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 mb-3">
+                <div class="card card1">
+                    <div class="card-body body1">
+                        <h5 class="card-title1">Discover.</h5>
+                        <p class="card-text text1">See what animals are around you! This database collects data of researchers dedicated to getting to know the world around them.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 mb-3">
+                <div class="card card2">
+                    <div class="card-body body2">
+                        <h5 class="card-title2">Learn.</h5>
+                        <p class="card-text text2">Interact with the data from a network of researchers world-wide to understand what is going on in the ecosystem around you</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 mb-3">
+                <div class="card card3">
+                    <div class="card-body body3">
+                        <h5 class="card-title3">Engage.</h5>
+                        <p class="card-text text3">Seen a species before? Engage with other users, students, and researchers on our FORUM page to join in the discussion.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div class="card card4">
+                    <div class="card-body body4">
+                        <h5 class="card-title4">Explore.</h5>
+                        <p class="card-text text4">Want to gather your own data? Purchase a device, and start collecting data on species. Check out our DEVICES page to start today.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*<div class="card-deck p-5">
+        </div>*@
+    </div>
+    <script>
+        let map;
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: 38.4496, lng: -78.8689 },
+                zoom: 8,
+                styles: [
+                    { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+                    {
+                        elementType: "labels.text.stroke",
+                        stylers: [{ color: "#242f3e" }],
+                    },
+                    {
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#746855" }],
+                    },
+                    {
+                        featureType: "administrative.locality",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#d59563" }],
+                    },
+                    {
+                        featureType: "poi",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#d59563" }],
+                    },
+                    {
+                        featureType: "poi.park",
+                        elementType: "geometry",
+                        stylers: [{ color: "#263c3f" }],
+                    },
+                    {
+                        featureType: "poi.park",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#6b9a76" }],
+                    },
+                    {
+                        featureType: "road",
+                        elementType: "geometry",
+                        stylers: [{ color: "#38414e" }],
+                    },
+                    {
+                        featureType: "road",
+                        elementType: "geometry.stroke",
+                        stylers: [{ color: "#212a37" }],
+                    },
+                    {
+                        featureType: "road",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#9ca5b3" }],
+                    },
+                    {
+                        featureType: "road.highway",
+                        elementType: "geometry",
+                        stylers: [{ color: "#746855" }],
+                    },
+                    {
+                        featureType: "road.highway",
+                        elementType: "geometry.stroke",
+                        stylers: [{ color: "#1f2835" }],
+                    },
+                    {
+                        featureType: "road.highway",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#f3d19c" }],
+                    },
+                    {
+                        featureType: "transit",
+                        elementType: "geometry",
+                        stylers: [{ color: "#2f3948" }],
+                    },
+                    {
+                        featureType: "transit.station",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#d59563" }],
+                    },
+                    {
+                        featureType: "water",
+                        elementType: "geometry",
+                        stylers: [{ color: "#17263c" }],
+                    },
+                    {
+                        featureType: "water",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#515c6d" }],
+                    },
+                    {
+                        featureType: "water",
+                        elementType: "labels.text.stroke",
+                        stylers: [{ color: "#17263c" }],
+                    },
+                ],
+            });
+
+            // Add marker
+
+            var marker = new google.maps.Marker({
+                position: { lat: 38.4496, lng: -78.8689 },
+                map: map
+            });
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTcLbCbRTcWpJFh27or8z0ohzFaNXL0Pw&callback=initMap&libraries=&v=weekly">
+    </script>
+</body>
+</html>
+

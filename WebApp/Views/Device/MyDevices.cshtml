@@ -1,0 +1,203 @@
+﻿@model IEnumerable<Device>
+
+<!DOCTYPE html>
+<head>
+    <title>Simple Map</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+</head>
+<body>
+    <div class="bg-light container-fluid p-0 mt-3">
+        <table class="table table-sm table-responsive-sm table-bordered table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">DeviceId</th>
+                    <th scope="col">Nickname</th>
+                    <th scope="col">Latitude</th>
+                    <th scope="col">Longtiude</th>
+                    <th scope="col">ProjectId</th>
+                    <th scope="col">Actions </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeviceId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nickname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Latitude)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Longitude)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProjectId)
+                    </td>
+                    <td>
+                        <a asp-action="devicedetails" asp-controller="device" asp-route-id="@item.DeviceId" class="btn btn-primary">Details</a>
+                        @*@if ((await AuthorizationService.AuthorizeAsync(
+            User, item,
+            ContactOperations.Update)).Succeeded)
+            {
+                <a asp-page="./Edit" asp-route-id="@item.ContactId">Edit</a>
+                <text> | </text>
+            }
+
+            <a asp-page="./Details" asp-route-id="@item.ContactId">Details</a>
+
+            @if ((await AuthorizationService.AuthorizeAsync(
+            User, item,
+            ContactOperations.Delete)).Succeeded)
+            {
+                <text> | </text>
+                <a asp-page="./Delete" asp-route-id="@item.ContactId">Delete</a>
+            }*@
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div id="map" class="mt-4"></div>
+<script  type="text/javascript">
+    let devices = @Html.Raw(Json.Serialize(Model));
+    let map;
+    
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: 38.4496, lng: -78.8689 },
+                zoom: 8,
+                styles: [
+                    { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+                    {
+                        elementType: "labels.text.stroke",
+                        stylers: [{ color: "#242f3e" }],
+                    },
+                    {
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#746855" }],
+                    },
+                    {
+                        featureType: "administrative.locality",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#d59563" }],
+                    },
+                    {
+                        featureType: "poi",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#d59563" }],
+                    },
+                    {
+                        featureType: "poi.park",
+                        elementType: "geometry",
+                        stylers: [{ color: "#263c3f" }],
+                    },
+                    {
+                        featureType: "poi.park",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#6b9a76" }],
+                    },
+                    {
+                        featureType: "road",
+                        elementType: "geometry",
+                        stylers: [{ color: "#38414e" }],
+                    },
+                    {
+                        featureType: "road",
+                        elementType: "geometry.stroke",
+                        stylers: [{ color: "#212a37" }],
+                    },
+                    {
+                        featureType: "road",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#9ca5b3" }],
+                    },
+                    {
+                        featureType: "road.highway",
+                        elementType: "geometry",
+                        stylers: [{ color: "#746855" }],
+                    },
+                    {
+                        featureType: "road.highway",
+                        elementType: "geometry.stroke",
+                        stylers: [{ color: "#1f2835" }],
+                    },
+                    {
+                        featureType: "road.highway",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#f3d19c" }],
+                    },
+                    {
+                        featureType: "transit",
+                        elementType: "geometry",
+                        stylers: [{ color: "#2f3948" }],
+                    },
+                    {
+                        featureType: "transit.station",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#d59563" }],
+                    },
+                    {
+                        featureType: "water",
+                        elementType: "geometry",
+                        stylers: [{ color: "#17263c" }],
+                    },
+                    {
+                        featureType: "water",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#515c6d" }],
+                    },
+                    {
+                        featureType: "water",
+                        elementType: "labels.text.stroke",
+                        stylers: [{ color: "#17263c" }],
+                    },
+                ],
+            });
+            $.get("@Url.Action("GetAllLocation", "Device")", function (data, status) {
+                //var markers = [];
+                // Add marker
+                for (var i = 0; i < data.length; i++) {
+                    var infoWindow = new google.maps.InfoWindow();
+                    var marker = new google.maps.Marker({
+                        position: { lat: data[i].Latitude, lng: data[i].Longitude },
+                        map: map
+                        
+                    });
+                    marker.addListener("click", () => {
+                        infoWindow.setContent(data.Nickname);
+                        infowindow.open(map, marker);
+                    });
+                    //(function (marker, data) {
+                    //    google.maps.event.addListener(marker, "click", function (e) {
+                    //        infoWindow.setContent(data.Nickname);
+                    //        infoWindow.open(map, marker);
+                    //    });
+                    //})(marker, data);
+                }
+            });
+            var imarker = new google.maps.Marker({
+                position: { lat: 38.4496, lng: -78.8689 },
+                map: map,
+            });
+            var infowindow = new google.maps.InfoWindow({
+                context: '<h1>Hello</h1>'
+            });
+
+            marker.addListen('click', function () {
+                infowindow.open(map, marker);
+            });
+
+    }
+    
+        
+</script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTcLbCbRTcWpJFh27or8z0ohzFaNXL0Pw&callback=initMap&libraries=&v=weekly">
+    </script>
+</body>

@@ -1,0 +1,33 @@
+﻿@model Project
+
+@{ 
+    ViewBag.Title = "Create Project";
+}
+<div class="d-flex justify-content-md-center align-items-center vh-100">
+    <div class="bg-light container">
+        <img src="~/images/LogoCrop.png" id="logo2" class="img-fluid m-2 mx-auto d-block" />
+        <h1 class="text-orange text-center">User Login</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <form asp-controller="project" asp-action="createproject" method="post" class="bg-light m-5">
+                        <div class="form-group">
+                            <label asp-for="Title"></label>
+                            <input asp-for="Title" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Description"></label>
+                            <textarea asp-for="Description" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="form-control">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

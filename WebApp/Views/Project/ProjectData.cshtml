@@ -1,0 +1,55 @@
+﻿@model ProjectDataViewModel
+<div class="container-fluid mt-3 p-0 bg-light">
+    <table class="table table-sm table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Timestamp</th>
+                <th scope="col">Weight</th>
+                <th scope="col">Temperature</th>
+                <th scope="col">Humidity</th>
+                <th scope="col">Length</th>
+                <th scope="col">ScienceName</th>
+                <th scope="col">Common Name</th>
+                <th scope="col">Validate Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ObservationList)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ObservationID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Timestamp)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Weight)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Temperature)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Humidity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Length)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sciencename)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Commonname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Validatestatus)
+                    </td>
+                    <td>
+                        <a asp-action="editobservation" asp-controller="observation" asp-route-id="@item.ObservationID">Edit</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

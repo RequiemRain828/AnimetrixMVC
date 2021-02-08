@@ -1,0 +1,81 @@
+﻿@model WebApp.ViewModels.DeviceDetailsViewModel
+@{
+    ViewBag.Title = "My Devices";
+}
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card m-3">
+            <div class="card-header">
+                <h3></h3>
+            </div>
+            <div class="card-body text-center">
+                <h4>Device Nickname: @Model.Device.Nickname</h4>
+                <h4>Latitude: @Model.Device.Latitude</h4>
+                <h4>Longtitude: @Model.Device.Longitude</h4>
+            </div>
+            <div class="card-footer text-center">
+                <a asp-controller="device" asp-action="mydevices" class="btn btn-primary">Back</a>
+                <a asp-controller="device" asp-action="editdevice" class="btn btn-primary">Edit</a>
+                <a asp-controller="device" asp-action="addobservation" class="btn btn-primary">Add Observations</a>
+                <a asp-controller="observation" asp-action="createobservation" asp-route-id="@Model.Device.DeviceId" class="btn btn-success">Create Observations</a>
+                <a asp-controller="device" asp-action="" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt-3 p-0 bg-light">
+    <table class="table table-sm table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Timestamp</th>
+                <th scope="col">Weight</th>
+                <th scope="col">Temperature</th>
+                <th scope="col">Humidity</th>
+                <th scope="col">Length</th>
+                <th scope="col">ScienceName</th>
+                <th scope="col">Common Name</th>
+                <th scope="col">Validate Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ObservationList)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ObservationID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Timestamp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Weight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Temperature)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Humidity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Length)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sciencename)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Commonname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Validatestatus)
+                </td>
+                <td>
+                    <a asp-action="editobservations" asp-controller="device" asp-route-id="@item.ObservationID">Edit</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,100 @@
+﻿@model ProjectDetailsViewModel
+
+@{
+    ViewBag.Title = "My Projects";
+}
+<div class="bg-light container-fluid p-0 mt-3">
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="card m-3">
+                <div class="card-header">
+                    <h3></h3>
+                </div>
+                <div class="card-body text-center">
+                    <h1>Project Title: @Model.Project.Title</h1>
+                    <h4>Project ID: @Model.Project.ProjectId</h4>
+                    <h4>Project Description: @Model.Project.Description</h4>
+                </div>
+                <div class="card-footer text-center">
+                    <a asp-controller="project" asp-action="projectdata" asp-route-id="@Model.Project.ProjectId" class="btn btn-primary">View Data</a>
+                    <a asp-controller="project" asp-action="editproject" class="btn btn-primary">Edit</a>
+                    <a asp-controller="project" asp-action="myprojects" class="btn btn-primary">Back</a>
+                    <a asp-controller="project" asp-action="" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bg-light container-fluid pl-4 mt-3">
+    <div class="row justify-content-center">
+        @*<div class="col-sm-1"></div>*@
+        <div class="col-sm-6">
+            <form asp-controller="project" asp-action="removedevices" method="post">
+                <input type="hidden" value="@Model.Project.ProjectId" asp-for="Project.ProjectId">
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Project Devices</label>
+                    <select multiple class="form-control" id="" asp-for="Device.DeviceId">
+                        @foreach (var item in Model.Devices)
+                        {
+                            <option value="@item.DeviceId">@item.Nickname</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Remove Device</button>
+                </div>
+            </form>
+            <form asp-controller="project" asp-action="adddevices" method="post">
+                <input type="hidden" value="@Model.Project.ProjectId" asp-for="Project.ProjectId">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Add Device</button>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Available Devices</label>
+                    <select multiple class="form-control" id="" asp-for="Device.DeviceId">
+                        @foreach (var item in Model.AvailDevices)
+                        {
+                            <option value="@item.DeviceId">@item.Nickname</option>
+                        }
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-6">
+            <form asp-controller="project" asp-action="removemembers" method="post">
+                <input type="hidden" value="@Model.Project.ProjectId" asp-for="Project.ProjectId">
+                <input type="hidden" value="@ViewBag.AssignId" asp-for="Assignment.Id">
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Project Members</label>
+                    <select multiple class="form-control" id="" asp-for="User.Id">
+                        @foreach (var user in Model.Users)
+                        {
+                            <option value="@user.Id">@user.UserName</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Remove Member</button>
+                </div>
+            </form>
+            <form asp-controller="project" asp-action="addmembers" method="post">
+                <input type="hidden" value="@Model.Project.ProjectId" asp-for="Project.ProjectId">
+                
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Add Member</button>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Available Members</label>
+                    <select multiple class="form-control" id="" asp-for="User.Id">
+                        @foreach (var user in ViewBag.list)
+                        {
+                            <option value="@user.Id">@user.UserName</option>
+                        }
+                    </select>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
