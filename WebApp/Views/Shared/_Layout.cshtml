@@ -27,7 +27,7 @@
                     <a class="nav-link" asp-action="about" asp-controller="home">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-action="product" asp-controller="home">Product Details</a>
+                    <a class="nav-link" href="#" >Product Details</a>
                 </li>
                 @if (signInManager.IsSignedIn(User))
                 {
@@ -57,9 +57,9 @@
                             Community
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" asp-action="teamlist" asp-controller="community">My Team</a>
+                            <a class="dropdown-item" href="#">Community Chat</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" asp-action="myteam" asp-controller="community">Community Chat</a>
+                            
                         </div>
                     </li>
                 }

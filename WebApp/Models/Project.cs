@@ -10,6 +10,7 @@ namespace WebApp.Models
         public int ProjectId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public string OwnerId { get; set; }
         public virtual ICollection<ProjectAssignment> Assignments { get; set; }
         public virtual ICollection<Device> Devices { get; set; }
     }

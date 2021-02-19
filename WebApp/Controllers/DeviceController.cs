@@ -27,7 +27,7 @@ namespace WebApp.Controllers
         {
             //var data = context.Devices.ToList();
             var userid = userManager.GetUserId(HttpContext.User);
-            var data = from m in context.Devices join u in context.ApplicationUsers on m.UserId equals u.Id where u.Id == userid select m;
+            var data = from m in context.Devices join u in context.ApplicationUsers on m.UserId equals u.Id where u.Id == userid select m ;
             return Json(data, new Newtonsoft.Json.JsonSerializerSettings());
         }
         public ViewResult AddObservation(int id)
@@ -73,7 +73,6 @@ namespace WebApp.Controllers
         {
             Device newDevice = new Device { UserId = userManager.GetUserId(HttpContext.User), Nickname = device.Nickname, Longitude = device.Longitude, Latitude = device.Latitude};
             _deviceRepository.Add(newDevice);
-            //return RedirectToAction("index", "home");
             return RedirectToAction("mydevices", "device");
         }
         

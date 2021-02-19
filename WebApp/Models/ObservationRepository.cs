@@ -7,7 +7,7 @@ namespace WebApp.Models
 {
     public interface ObservationRepository
     {
-        Observation GetDevice(int Id);
+        Observation GetObservation(int Id);
         IEnumerable<Observation> GetAllObservation();
         Observation Add(Observation observation);
         Observation Update(Observation changes);
@@ -35,7 +35,7 @@ namespace WebApp.Models
             return context.Observations;
         }
 
-        public Observation GetDevice(int Id)
+        public Observation GetObservation(int Id)
         {
             return context.Observations.Find(Id);
         }

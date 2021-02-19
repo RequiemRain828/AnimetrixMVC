@@ -56,13 +56,11 @@ namespace WebApp
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseAuthentication();
-            //app.UseMvcWithDefaultRoute();
+            app.UseAuthentication();          
             app.UseMvc(routes =>
             {
                 routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
-
 
         }
     }

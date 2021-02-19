@@ -8,9 +8,12 @@
   <ItemGroup>
     <Compile Remove="Migrations\20210128003754_initial.cs" />
     <Compile Remove="Migrations\20210128003754_initial.Designer.cs" />
+    <Compile Remove="Migrations\20210219192007_ProjectChanges.cs" />
+    <Compile Remove="Migrations\20210219192007_ProjectChanges.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Community\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
